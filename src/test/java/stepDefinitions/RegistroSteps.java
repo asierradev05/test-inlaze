@@ -1,38 +1,39 @@
 package stepDefinitions;
 
-import io.cucumber.java.en.*;
+import io.cucumber.java8.En;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import pageObjects.RegistrationPage;
 import utils.DriverManager;
+import utils.TestUtils;
+import java.io.IOException;
 
-public class RegistroSteps {
+public class RegistroSteps implements En {
 
     WebDriver driver = DriverManager.getDriver();
+    TestUtils testUtils = new TestUtils(driver);
+    RegistrationPage registrationPage;
 
-    @Given("The user is on the registration page")
-    public void theUserIsOnTheRegistrationPage() {
-        driver.get("https://test-qa.inlaze.com/auth/sign-in"); // URL de prueba
-    }
+    public RegistroSteps (){
+        registrationPage = new RegistrationPage();
 
-    @When("The user completes the fields {string}, {string}, {string}")
-    public void theUserCompletesTheFields(String name, String email, String password) {
-        driver.findElement(By.id("name")).sendKeys(name);
-        driver.findElement(By.id("email")).sendKeys(email);
-        driver.findElement(By.id("password")).sendKeys(password);
-        driver.findElement(By.id("confirmPassword")).sendKeys(password);
-    }
+        Given("^The user is on the registration page$", () -> {
+        registrationPage.theUserIsOnTheRegistrationPage();
+        });
 
-    @And("Clicks on the register button")
-    public void clicksOnTheRegisterButton() {
-        driver.findElement(By.id("registerSubmit")).click();
-    }
+        When("The user completes the fields {string}, {string}, {string}", (String nombre1,String nombre2, String nombre3) -> {
+            registrationPage.theUserCompletesTheFields(nombre2,nombre1,nombre3);
+        });
 
-    @Then("You should see the message {string}")
-    public void youShouldSeeTheMessage(String expectedMessage) {
-        WebElement message = driver.findElement(By.id("welcomeMessage"));
-        assert message.getText().contains(expectedMessage);
-        DriverManager.quitDriver();
+        And("Clicks on the register button", () -> {
+        ;
+            registrationPage.clicksOnTheRegisterButton();
+        });
+        Then("You should see the message {string}", (String nombre1, String nombre2,String nombre3) -> {
+
+            registrationPage.theUserCompletesTheFields(nombre1,nombre2,nombre3);
+        });
 
     }
 }
