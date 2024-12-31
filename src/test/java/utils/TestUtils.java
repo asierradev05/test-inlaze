@@ -7,12 +7,17 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.JavascriptExecutor;
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
 
 public class TestUtils {
 
     private static WebDriver driver;
+
 
 
     public TestUtils(WebDriver driver) {
@@ -45,4 +50,11 @@ public class TestUtils {
         String screenshotPath = takeScreenshot(screenshotName);
         attachScreenshotToReport(screenshotPath);
     }
+
+    public WebElement waitForElement(By locator, int timeoutInSeconds) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
 }

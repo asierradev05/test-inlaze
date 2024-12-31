@@ -1,39 +1,47 @@
 package stepDefinitions;
 
 import io.cucumber.java8.En;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import pageObjects.RegistrationPage;
+import pageObjects.RegistrationValidation;
 import utils.DriverManager;
 import utils.TestUtils;
-import java.io.IOException;
 
 public class RegistroSteps implements En {
 
     WebDriver driver = DriverManager.getDriver();
     TestUtils testUtils = new TestUtils(driver);
     RegistrationPage registrationPage;
+    RegistrationValidation registrationValidation;
 
-    public RegistroSteps (){
+    public RegistroSteps() {
         registrationPage = new RegistrationPage();
+        registrationValidation = new RegistrationValidation();
 
         Given("^The user is on the registration page$", () -> {
-        registrationPage.theUserIsOnTheRegistrationPage();
+            registrationPage.theUserIsOnTheRegistrationPage();
         });
 
-        When("The user completes the fields {string}, {string}, {string}", (String nombre1,String nombre2, String nombre3) -> {
-            registrationPage.theUserCompletesTheFields(nombre2,nombre1,nombre3);
+        When("The user enters valid data \\(name, email, password)", () -> {
+            registrationPage.theUserEntersValidData();
         });
 
-        And("Clicks on the register button", () -> {
-        ;
-            registrationPage.clicksOnTheRegisterButton();
-        });
-        Then("You should see the message {string}", (String nombre1, String nombre2,String nombre3) -> {
-
-            registrationPage.theUserCompletesTheFields(nombre1,nombre2,nombre3);
+        Then("The user registers successfully", () -> {
+            registrationPage.theUserRegistersSuccessfully();
         });
 
+        When("The user enters invalid data or leaves mandatory fields empty", () -> {
+            registrationValidation.validateInvalidData();
+        });
+
+        Then("The user sees validation messages for the name, email, and password fields", () -> {
+//            registrationValidation.validateErrorMessage("name", "Minimum 2 words");
+//            registrationValidation.validateErrorMessage("email", "Standard format");
+//            registrationValidation.validateErrorMessage("password", "Length and character requirements");
+        });
+
+        Then("The user sees a password mismatch message", () -> {
+            registrationValidation.validateErrorMessage("password", "Passwords do not match");
+        });
     }
 }

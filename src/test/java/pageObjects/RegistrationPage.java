@@ -1,49 +1,61 @@
 package pageObjects;
 
+import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.DriverManager;
 import utils.TestUtils;
-import java.io.IOException;
 
+import java.time.Duration;
+import java.util.Map;
 
 public class RegistrationPage {
+
     WebDriver driver = DriverManager.getDriver();
+    Faker faker = new Faker();
     TestUtils testUtils = new TestUtils(driver);
 
+    public void theUserIsOnTheRegistrationPage() {
+        driver.get("https://test-qa.inlaze.com/auth/sign-up");
+    }
 
-    public void theUserCompletesTheFields(String name, String email, String password) throws IOException {
-        WebElement nameField = driver.findElement(By.id("name"));
+    public void theUserEntersValidData() {
+
+        WebElement nameField = driver.findElement(By.id("full-name"));
         WebElement emailField = driver.findElement(By.id("email"));
-        WebElement passwordField = driver.findElement(By.id("password"));
 
-        nameField.sendKeys(name);
-        emailField.sendKeys(email);
-        passwordField.sendKeys(password);
+        WebElement passwordField = driver.findElement(By.xpath("//app-password[@id='password']//input[@type='password']"));
+        WebElement passwordFieldCheck = driver.findElement(By.xpath("//app-password[@id='confirm-password']//input[@type='password']"));
+        WebElement sumbitButton = driver.findElement(By.xpath("//button[@type='submit' and contains(@class, 'btn-primary') and text()=' Sign up ']"));
 
+        String validName = faker.name().fullName();
+        String validEmail = faker.internet().emailAddress();
+        String validPassword = "Password123";
 
-        testUtils.highlightAndScreenshot(nameField, "name_field_filled");
-        testUtils.highlightAndScreenshot(emailField, "email_field_filled");
-        testUtils.highlightAndScreenshot(passwordField, "password_field_filled");
-    }
-    public void theUserIsOnTheRegistrationPage() throws IOException {
-        driver.get("https://test-qa.inlaze.com/auth/sign-in");
+        testUtils.highlightElement(nameField);
+        testUtils.highlightElement(emailField);
+        testUtils.highlightElement(passwordField);
+        testUtils.highlightElement(passwordFieldCheck);
 
-        WebElement registerButton = driver.findElement(By.id("registerSubmit"));
-        testUtils.highlightAndScreenshot(registerButton, "registration_page");
-    }
-    public void clicksOnTheRegisterButton() throws IOException {
-        WebElement registerButton = driver.findElement(By.id("registerSubmit"));
-        testUtils.highlightAndScreenshot(registerButton, "register_button_clicked");
-        registerButton.click();
-    }
-    public void youShouldSeeTheMessage(String expectedMessage) throws IOException {
-        WebElement message = driver.findElement(By.id("welcomeMessage"));
-        testUtils.highlightAndScreenshot(message, "welcome_message");
+        nameField.sendKeys(validName);
+        emailField.sendKeys(validEmail);
+        passwordField.sendKeys(validPassword);
+        passwordFieldCheck.sendKeys(validPassword);
 
-        assert message.getText().contains(expectedMessage);
+        testUtils.highlightElement(sumbitButton);
+        sumbitButton.click();
     }
 
+    public void theUserRegistersSuccessfully() {
+        By validationToastLocator = By.xpath("//div[contains(@class, 'ml-3') and contains(@class, 'text-sm') and contains(@class, 'font-normal') and text()='Successful registration!']");
+
+        WebElement validationToast = testUtils.waitForElement(validationToastLocator, 5);
+        testUtils.highlightElement(validationToast);
+        assert validationToast.isDisplayed() : "Validation toast was not displayed!";
+
+
+    }
 }
-
