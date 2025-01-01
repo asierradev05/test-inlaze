@@ -1,3 +1,5 @@
+@Login-Feature
+
 Feature: User Login
   In order to access the platform
   As a registered user

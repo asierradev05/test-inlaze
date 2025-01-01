@@ -1,3 +1,4 @@
+@Register-Feature
 Feature: User Registration
   As a new user
   I want to register on the platform
@@ -11,7 +12,7 @@ Feature: User Registration
 
     #for this case the correct thing to do is to make the verifications by the field to check if you like to check each one of the fields.
     #it sends you a message for each type of error.
-  @Register-Validations-001
+  @Register-Validations-002
   Scenario: Registration form validations
     Given The user is on the registration page
     When The user enters invalid data:
