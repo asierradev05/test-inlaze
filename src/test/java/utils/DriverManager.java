@@ -9,7 +9,6 @@ public class DriverManager {
 
     private static WebDriver driver;
 
-    // Método para inicializar el WebDriver (si no está ya inicializado)
     public static WebDriver getDriver() {
         if (driver == null) {
             WebDriverManager.edgedriver().setup();
@@ -20,7 +19,6 @@ public class DriverManager {
         return driver;
     }
 
-    // Método para cerrar y limpiar el WebDriver
     public static void quitDriver() {
         if (driver != null) {
             driver.quit();

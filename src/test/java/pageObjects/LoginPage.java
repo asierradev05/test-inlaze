@@ -15,7 +15,6 @@ public class LoginPage {
     private final TestUtils testUtils = new TestUtils(driver);
     private final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-    // Locators
     private final By emailFieldLocator = By.id("email");
     private final By passwordFieldLocator = By.xpath("//app-password[@id='password']//input[@type='password']");
     private final By submitButtonLocator = By.xpath("//button[@type='submit']");
@@ -26,7 +25,6 @@ public class LoginPage {
     private final By logoutOptionLocator = By.xpath("//a[text()='Logout']");
     private final By loginPageIndicatorLocator = By.xpath("//*[contains(text(),'Sign in')]");
 
-    // Page state verification methods
     public boolean isLoginPageDisplayed() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(loginPageIndicatorLocator)).isDisplayed();
     }
@@ -136,7 +134,6 @@ public class LoginPage {
         }
     }
 
-    // Helper methods
     private void enterCredentials(String email, String password) {
         WebElement emailField = wait.until(ExpectedConditions.presenceOfElementLocated(emailFieldLocator));
         WebElement passwordField = wait.until(ExpectedConditions.presenceOfElementLocated(passwordFieldLocator));

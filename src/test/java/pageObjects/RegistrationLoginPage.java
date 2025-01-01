@@ -15,7 +15,6 @@ public class RegistrationLoginPage {
     private final WebDriverWait wait;
 
 
-    // Registration Form Locators
     private static final By REGISTER_NAME_INPUT = By.id("full-name");
     private static final By REGISTER_EMAIL_INPUT = By.id("email");
     private static final By REGISTER_PASSWORD_INPUT = By.xpath("//app-password[@id='password']//input[@type='password']");
@@ -23,18 +22,14 @@ public class RegistrationLoginPage {
     private static final By REGISTER_BUTTON = By.xpath("//button[@type='submit' and contains(@class, 'btn-primary') and text()=' Sign up ']");
     private static final By REGISTRATION_SUCCESS_MESSAGE = By.xpath("//div[contains(@class, 'ml-3') and text()='Successful registration!']");
 
-    // Login Form Locators
-    private static final By LOGIN_EMAIL_INPUT = By.id("email"); // Campo de correo en el formulario de login
-    private static final By LOGIN_PASSWORD_INPUT = By.xpath("//app-password[@id='password']//input[@type='password']"); // Campo de contraseña en el formulario de login
-    private static final By LOGIN_BUTTON = By.xpath("//button[@type='submit']"); // Botón de enviar (login)
+    private static final By LOGIN_EMAIL_INPUT = By.id("email");
+    private static final By LOGIN_PASSWORD_INPUT = By.xpath("//app-password[@id='password']//input[@type='password']");
+    private static final By LOGIN_BUTTON = By.xpath("//button[@type='submit']");
 
-    // Dashboard Locators
-    private static final By USER_NAME_DISPLAY = By.xpath("//span[contains(@class, 'user-name')]"); // Nombre del usuario en el Dashboard
-    private static final By DASHBOARD_CONTAINER = By.xpath("//div[contains(@class, 'dashboard-container')]"); // Contenedor del Dashboard
-    private static final By LOGOUT_BUTTON = By.xpath("//button[contains(@class, 'logout-button')]"); // Botón de logout
+    private static final By LOGOUT_BUTTON = By.xpath("//button[contains(@class, 'logout-button')]");
 
     public By getUserNameLocator(String name) {
-        return By.xpath("//h2[text()='" + name + "']");  // Cambia el xpath de acuerdo con el nombre
+        return By.xpath("//h2[text()='" + name + "']");
     }
 
     public RegistrationLoginPage() {

@@ -36,11 +36,11 @@ public class TestUtils {
     }
 
     public String generateRandomName() {
-        return faker.name().fullName(); // Genera un nombre completo aleatorio
+        return faker.name().fullName();
     }
 
     public String generateRandomEmail() {
-        return faker.internet().emailAddress(); // Genera un correo electrónico aleatorio
+        return faker.internet().emailAddress();
     }
 
     public String generateRandomPassword() {

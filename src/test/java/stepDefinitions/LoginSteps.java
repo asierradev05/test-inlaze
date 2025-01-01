@@ -10,11 +10,10 @@ public class LoginSteps implements En {
     private final WebDriver driver = DriverManager.getDriver();
     private final LoginPage loginPage = new LoginPage();
 
-    // Constants
     private static final String BASE_URL = "https://test-qa.inlaze.com/auth/sign-in";
     private static final String VALID_EMAIL = "angel.david.sierra.g@gmail.com";
     private static final String VALID_PASSWORD = "As1234567";
-    private static final String INVALID_EMAIL = "angel.david.sierra.g@gmail.com";
+    private static final String INVALID_EMAIL = "angel.david.sierra.g@gmail.";
     private static final String INVALID_PASSWORD = "AS..2s";
 
     public LoginSteps() {
