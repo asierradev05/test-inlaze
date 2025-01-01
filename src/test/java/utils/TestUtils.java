@@ -1,20 +1,20 @@
 package utils;
 
-import org.apache.commons.io.FileUtils;
+import com.github.javafaker.Faker;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.File;
-import java.io.IOException;
 import java.time.Duration;
 
 public class TestUtils {
     private static WebDriver driver;
     private final WebDriverWait wait;
+    private final Faker faker;
 
     public TestUtils(WebDriver driver) {
         TestUtils.driver = driver;
+        this.faker = new Faker();
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
@@ -35,5 +35,15 @@ public class TestUtils {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+    public String generateRandomName() {
+        return faker.name().fullName(); // Genera un nombre completo aleatorio
+    }
 
+    public String generateRandomEmail() {
+        return faker.internet().emailAddress(); // Genera un correo electrónico aleatorio
+    }
+
+    public String generateRandomPassword() {
+        return faker.internet().password(3, 13, true, true);
+    }
 }
