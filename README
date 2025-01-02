@@ -1,0 +1,160 @@
+🏈 Inlaze QA Technical Test
+
+📜 Context
+
+You are the QA Engineer for Inlaze, a leading affiliate marketing company specializing in sports betting. Inlaze is currently positioning itself as the largest sports betting web service in Latin America.
+
+🎯 Objective of the Test
+
+The main goal of this technical test is to evaluate your knowledge in designing and executing automated test cases using Selenium (with Gradle for dependency management) to ensure the quality of the user registration and authentication systems on the platform.
+
+🚀 Project Setup
+
+Prerequisites
+
+Java Development Kit (JDK) 8+
+
+Gradle installed on your system.
+
+EdgeDriver for Selenium execution (managed using WebDriverManager).
+
+A browser installed (Microsoft Edge in this case).
+
+Installation Steps
+
+Clone the repository:
+
+git clone <repository_url>
+
+Navigate to the project directory:
+
+cd inlaze-qa-test
+
+Build the project with Gradle:
+
+gradle build
+
+Run the tests using the pre-configured runner:
+
+gradle test
+
+📂 Project Structure
+
+|-- src
+|   |-- main
+|   |   |-- java
+|   |       |-- pageObjects
+|   |       |-- utils
+|   |-- test
+|       |-- java
+|           |-- stepDefinitions
+|           |-- runners
+|-- build.gradle
+
+Key Files
+
+LoginPage & RegistrationLoginPage: Encapsulate methods for handling login and registration workflows.
+
+TestUtils: Utility class for reusable actions like highlighting elements, generating random data (using Faker), and waiting for elements.
+
+DriverManager: Handles WebDriver initialization and termination.
+
+RunCucumberTest: Configures the execution of test scenarios written in Gherkin syntax.
+
+🧪 How to Run Tests
+
+Using Cucumber Runner
+
+Select Tags:
+Tests can be filtered using tags defined in the feature files. For example, to run login-related tests:
+
+tags = "@Login-Feature"
+
+Modify the @CucumberOptions in RunCucumberTest.
+
+Execute Tests:
+Run the following command:
+
+gradle test
+
+Reports
+
+After execution, reports are generated in the target/cucumber-reports.html file for review.
+
+🛠️ Features Tested
+
+Registration
+
+The form accepts a name, email, and password.
+
+Validations:
+
+Name requires at least two words.
+
+Email must be unique and follow email standards.
+
+Password must meet complexity requirements (uppercase, lowercase, number, special character, minimum length).
+
+The system validates password confirmation.
+
+The form cannot be submitted if fields are incomplete.
+
+Login
+
+Users can log in with registered credentials.
+
+Form cannot be submitted until all fields are complete.
+
+Displays the user’s name upon successful login.
+
+Allows logout functionality.
+
+📋 Feature Files
+
+Feature files are written in Gherkin syntax, focusing on:
+
+Login Scenarios
+
+Successful login and logout.
+
+Form validation for incomplete credentials.
+
+Registration and Login Flow
+
+End-to-end testing of user registration and login.
+
+📎 Annotations Used
+
+Special Notations in Code
+
+@Login-Feature: Groups all login-related scenarios.
+
+@Register_and_login-001: Tags scenarios for end-to-end registration and login tests.
+
+highlightElement(): Adds a blue border to elements during testing for better visual debugging.
+
+🌟 Key Advantages of This Framework
+
+Modularity: Separation of concerns with distinct classes for pages, utilities, and runners.
+
+Scalability: Easily extendable for additional features or workflows.
+
+Reusability: Utility methods like highlightElement and generateRandomData minimize redundancy.
+
+Readability: Feature files written in Gherkin make tests comprehensible to both technical and non-technical stakeholders.
+
+🖥️ Technologies Used
+
+Java 11
+
+Selenium WebDriver
+
+Gradle (Dependency and build management)
+
+Cucumber (Behavior-driven development)
+
+Faker (Random test data generation)
+
+📖 Conclusion
+
+This project demonstrates automated testing of critical user workflows on the Inlaze platform, ensuring a robust registration and authentication system while adhering to best practices in QA automation. If you have any questions or need further assistance, feel free to reach out!
