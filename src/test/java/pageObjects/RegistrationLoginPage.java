@@ -34,7 +34,7 @@ public class RegistrationLoginPage {
 
     public RegistrationLoginPage() {
         this.driver = DriverManager.getDriver();
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(42)); // 42 segundos de espera
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(42));
     }
 
     // Registration Methods

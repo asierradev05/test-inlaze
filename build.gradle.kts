@@ -16,8 +16,6 @@ dependencies {
     implementation("io.cucumber:cucumber-junit:7.14.0")
     implementation("io.github.bonigarcia:webdrivermanager:5.5.3")
     testImplementation("junit:junit:4.13.2")
-
-
 }
 
 tasks.test {
